@@ -5,6 +5,7 @@ import SearchAndFilterBar from "../components/schedule/SearchAndFilterBar";
 import ScheduleCard from "../components/schedule/ScheduleCard";
 import BottomNav from "../components/common/BottomNav";
 import { updateEmployeeStatus, getLeads, logoutEmployee } from '../../services/api';
+import { format } from 'date-fns';
 
 const STORAGE_KEY = 'employee_leads';
 const PLACEHOLDER_AVATAR = 'https://randomuser.me/api/portraits/lego/1.jpg';
@@ -12,6 +13,8 @@ const PLACEHOLDER_AVATAR = 'https://randomuser.me/api/portraits/lego/1.jpg';
 const EmployeeSchedulePage = () => {
   const [leads, setLeads] = useState([]);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState('all'); // 'all' or 'today'
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
   const employeeId = sessionStorage.getItem('employeeId') || '';
   const employeeEmail = sessionStorage.getItem('employeeEmail') || '';
 
@@ -108,7 +111,13 @@ const EmployeeSchedulePage = () => {
   }, [employeeId]);
 
   // Only show leads with a scheduledDate and status not 'Closed'
-  const scheduledLeads = leads.filter(l => l.scheduledDate && l.status !== 'Closed');
+  let scheduledLeads = leads.filter(l => l.scheduledDate && l.status !== 'Closed');
+
+  // Filter by Today or All
+  if (filter === 'today') {
+    const todayStr = format(new Date(), 'yyyy-MM-dd');
+    scheduledLeads = scheduledLeads.filter(l => l.scheduledDate && l.scheduledDate.slice(0, 10) === todayStr);
+  }
 
   // Optionally filter by search
   const filtered = scheduledLeads.filter(l =>
@@ -132,7 +141,19 @@ const EmployeeSchedulePage = () => {
     <div className={styles.page}>
       <ScheduleHeader onBack={() => window.history.back()} onLogout={handleLogout} />
       <div className={styles.content}>
-        <SearchAndFilterBar value={search} onChange={e => setSearch(e.target.value)} onFilter={() => {}} />
+        <div style={{ position: 'relative' }}>
+          <SearchAndFilterBar
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            onFilter={() => setShowFilterMenu(v => !v)}
+          />
+          {showFilterMenu && (
+            <div style={{ position: 'absolute', right: 0, top: 40, background: '#fff', border: '1px solid #eee', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', zIndex: 10 }}>
+              <button style={{ display: 'block', width: '100%', padding: 10, background: filter === 'today' ? '#f0f0f0' : '#fff', border: 'none', borderBottom: '1px solid #eee', cursor: 'pointer' }} onClick={() => { setFilter('today'); setShowFilterMenu(false); }}>Today</button>
+              <button style={{ display: 'block', width: '100%', padding: 10, background: filter === 'all' ? '#f0f0f0' : '#fff', border: 'none', cursor: 'pointer' }} onClick={() => { setFilter('all'); setShowFilterMenu(false); }}>All</button>
+            </div>
+          )}
+        </div>
         <div className={styles.cardsList}>
           {activities.map((a, i) => (
             <ScheduleCard key={a.id} activity={a} highlight={a.highlight} />
