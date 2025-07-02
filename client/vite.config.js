@@ -9,4 +9,9 @@ export default defineConfig({
       '/api': 'http://localhost:5000',
     },
   },
+  build: {
+    commonjsOptions: {
+      include: [/node_modules/],
+    },
+  },
 })
