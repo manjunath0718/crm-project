@@ -1,0 +1,5 @@
+Name,Email,Phone,Received Date,Status,Type,Language,Location,Assigned Employee
+John Doe,john@example.com,1234567890,2024-07-01,Open,Hot,English,Pune,
+Jane Smith,jane@example.com,9876543210,2024-07-02,Open,Warm,Hindi,Delhi,
+Bob Lee,bob@example.com,5551234567,2024-07-03,Closed,Cold,English,Hyderabad,manju nath
+Alice Wong,alice@example.com,4445556666,2024-07-04,Open,Warm,Tamil,Hyderabad,karthik reddy

@@ -1,0 +1,169 @@
+.card {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.cardHeader {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.timingSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.timingSection.active {
+    background-color: var(--light-blue);
+}
+
+.timeDisplay .label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.timeDisplay .time {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.toggleSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--green);
+}
+
+input:checked + .slider.red,
+.slider.red {
+    background-color: var(--red);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+.breakHistory {
+    padding: 0 20px 20px;
+}
+
+.breakTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.breakTable th, .breakTable td {
+    text-align: left;
+    padding: 10px 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.breakTable th {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.breakHistoryBlock {
+    margin-top: 10px;
+}
+
+.breakScrollable {
+    max-height: 132px;
+    overflow-y: auto;
+    margin-top: 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: #f7f9fa;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f7f9fa;
+}
+
+.breakScrollable::-webkit-scrollbar {
+    width: 6px;
+}
+.breakScrollable::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+}
+.breakScrollable::-webkit-scrollbar-track {
+    background: #f7f9fa;
+}
+
+.breakDivider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 4px 0 4px 0;
+    border-radius: 1px;
+    width: 100%;
+}
+
+.breakScrollableFull {
+    max-height: 176px; /* header (44px) + 3 rows (44px each) = 176px */
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: #f7f9fa;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f7f9fa;
+}
+
+.breakScrollableFull::-webkit-scrollbar {
+    width: 6px;
+}
+.breakScrollableFull::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+}
+.breakScrollableFull::-webkit-scrollbar-track {
+    background: #f7f9fa;
+}
+
+.stickyHeader {
+    position: sticky;
+    top: 0;
+    background: #f7f9fa;
+    z-index: 1;
+} 

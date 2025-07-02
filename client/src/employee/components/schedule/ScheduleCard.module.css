@@ -1,0 +1,81 @@
+.card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(30, 64, 175, 0.07);
+  padding: 18px 18px 14px 18px;
+  margin-bottom: 18px;
+  transition: background 0.2s, color 0.2s;
+}
+.active {
+  background: #2563eb;
+  color: #fff;
+}
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.type {
+  font-size: 1.05rem;
+}
+.date {
+  font-size: 0.98rem;
+  color: #a0aec0;
+}
+.card.active .date {
+  color: #e0e7ff;
+}
+.phone {
+  font-size: 1.02rem;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.callRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.98rem;
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+.active .callRow {
+  color: #fff;
+}
+.personRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+.closeBtn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 0;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.closeBtn:hover {
+  background: #1d4ed8;
+}
+.scheduledDate {
+  font-size: 0.95rem;
+  color: #888;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  text-align: left;
+} 

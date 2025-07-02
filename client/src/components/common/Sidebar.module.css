@@ -1,0 +1,77 @@
+.drawerPaper {
+  width: 240px; /* drawerWidth */
+  box-sizing: border-box;
+  background-color: #f8f8f8; /* Light grey background */
+  border-right: 1px solid #e0e0e0;
+  margin: 0; /* Ensures no top or left margin */
+  display: flex; /* To allow flex-grow on spacer */
+  flex-direction: column;
+  padding-top: 16px; /* Adjust padding for top content */
+}
+
+.branding {
+  padding: 16px; /* p: 2 */
+  text-align: center;
+  margin-bottom: 24px; /* Space before nav links */
+}
+
+.brandingText {
+  font-weight: bold;
+  color: #585d62; /* Primary blue */
+  font-size: 1.5rem; /* Adjusted font size for branding */
+}
+
+.navList {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  margin-top: 24px; /* mt: 3 */
+}
+
+.listItem {
+  border-radius: 8px;
+  margin: 0 8px 8px 8px; /* mx: 1, mb: 1 */
+  padding: 8px 16px;
+  color: rgba(0, 0, 0, 0.87); /* Default text color */
+  text-decoration: none; /* Remove underline from NavLink */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  background-color: rgba(0, 0, 0, 0.04); /* Default MUI hover effect */
+}
+
+.listItemActive {
+  background-color: #585f65; /* Primary blue for active link background */
+  color: #ffffff; /* White text for active link */
+  border-radius: 8px;
+  margin: 0 8px 8px 8px;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.listItemActive .icon {
+  color: #ffffff; /* White icon for active link */
+}
+
+.listItemIcon {
+  min-width: 40px; /* Default MUI ListItemIcon min-width */
+  color: rgba(0, 0, 0, 0.54); /* Default MUI icon color */
+  display: flex; /* Ensure icon centers */
+  justify-content: center;
+  align-items: center;
+}
+
+.listItemText {
+  font-size: 0.875rem; /* Default MUI ListItemText font size */
+  font-weight: 500; /* Medium weight for clarity */
+}
+
+.spacer {
+  flex-grow: 1;
+} 

@@ -1,0 +1,4 @@
+Name,Email,Phone,Received Date,Status,Type,Language,Location,Assigned Employee
+Alice Today,alice.today@example.com,1111111111,2025-06-29,Closed,Hot,English,Pune,karthik reddy
+Bob Today,bob.today@example.com,2222222222,2025-06-29,Open,Warm,Hindi,Delhi,manju nath
+Charlie Today,charlie.today@example.com,3333333333,2025-06-29,Closed,Cold,English,Hyderabad,

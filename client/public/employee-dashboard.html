@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanovaCRM Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --primary-blue: #405189;
+            --light-blue: #eef2fb;
+            --white: #ffffff;
+            --text-dark: #2a3042;
+            --text-light: #878a99;
+            --grey-bg: #f3f3f9;
+            --border-color: #e9e9ef;
+            --green: #0ab39c;
+            --red: #f06548;
+            --shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grey-bg);
+            color: var(--text-dark);
+            padding-bottom: 80px; /* Space for bottom nav */
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 480px; /* Common mobile width */
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 25px 20px 40px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .header .brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            opacity: 0.9;
+        }
+        
+        .header .greeting {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-top: 15px;
+            opacity: 0.8;
+        }
+
+        .header .employee-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .main-content {
+            padding: 20px;
+            margin-top: -20px; /* Pull content up slightly */
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .timing-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+        
+        .timing-section.active {
+            background-color: var(--light-blue);
+        }
+
+        .time-display .label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .time-display .time {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--green);
+        }
+        
+        input:checked.red + .slider {
+            background-color: var(--red);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+        
+        .break-history {
+            padding: 0 20px 20px;
+        }
+
+        .break-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .break-table th, .break-table td {
+            text-align: left;
+            padding: 10px 5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .break-table th {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .recent-activity-list {
+            list-style: none;
+            padding: 0 20px 20px;
+        }
+        
+        .recent-activity-list li {
+            padding: 15px 0;
+            display: flex;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .recent-activity-list li:last-child {
+            border-bottom: none;
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-light);
+            border-radius: 50%;
+            margin-top: 6px;
+            margin-right: 15px;
+        }
+        
+        .activity-text .main {
+            display: block;
+        }
+        
+        .activity-text .time-ago {
+            display: block;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--white);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 10px 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .nav-item i {
+            font-size: 1.8rem;
+        }
+        
+        .nav-item span {
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">CanovaCRM</div>
+            <div id="greetingText" class="greeting">Good Morning</div>
+            <div id="employeeName" class="employee-name">Rajesh Mehta</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Timings Card -->
+            <div class="card">
+                <div class="card-header">Timings</div>
+                <div id="checkInOutSection" class="timing-section">
+                    <div class="time-display">
+                        <div class="label">Checked-In</div>
+                        <div id="checkInTime" class="time">--:--</div>
+                    </div>
+                    <div class="time-display">
+                        <div class="label">Check Out</div>
+                        <div id="checkOutTime" class="time">--:--</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="checkInOutToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div id="breakSection" class="timing-section">
+                    <div class="time-display">
+                        <div class="label">Break</div>
+                        <div id="breakStartTime" class="time">--:--</div>
+                    </div>
+                    <div class="time-display">
+                        <div class="label">Ended</div>
+                        <div id="breakEndTime" class="time">--:--</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="breakToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="break-history">
+                    <table class="break-table">
+                        <thead>
+                            <tr>
+                                <th>Break</th>
+                                <th>Ended</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breakHistoryBody">
+                            <!-- Mock Data will be inserted here by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Activity Card -->
+            <div class="card">
+                <div class="card-header">Recent Activity</div>
+                <ul id="recentActivityList" class="recent-activity-list">
+                   <!-- Mock Data will be inserted here by JS -->
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class='bx bxs-home-alt-2'></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class='bx bxs-user-detail'></i>
+            <span>Leads</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class='bx bxs-calendar'></i>
+            <span>Schedule</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class='bx bxs-user-circle'></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const greetingTextEl = document.getElementById('greetingText');
+            const employeeNameEl = document.getElementById('employeeName');
+            
+            const checkInOutToggle = document.getElementById('checkInOutToggle');
+            const checkInTimeEl = document.getElementById('checkInTime');
+            const checkOutTimeEl = document.getElementById('checkOutTime');
+            const checkInOutSection = document.getElementById('checkInOutSection');
+            
+            const breakToggle = document.getElementById('breakToggle');
+            const breakStartTimeEl = document.getElementById('breakStartTime');
+            const breakEndTimeEl = document.getElementById('breakEndTime');
+            const breakSection = document.getElementById('breakSection');
+            const breakHistoryBody = document.getElementById('breakHistoryBody');
+
+            const recentActivityList = document.getElementById('recentActivityList');
+
+            // --- State ---
+            let isCheckedIn = false;
+            let checkInTimestamp = null;
+            let isOnBreak = false;
+            let breakStartTimestamp = null;
+            
+            // --- Utility Functions ---
+            const formatTime = (date) => {
+                return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            };
+
+            const formatDate = (date) => {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = String(date.getFullYear()).slice(-2);
+                return `${day}/${month}/${year}`;
+            }
+
+            // --- Dynamic Greeting ---
+            const setGreeting = () => {
+                const hour = new Date().getHours();
+                if (hour < 12) {
+                    greetingTextEl.textContent = 'Good Morning';
+                } else if (hour < 18) {
+                    greetingTextEl.textContent = 'Good Afternoon';
+                } else {
+                    greetingTextEl.textContent = 'Good Evening';
+                }
+            };
+            
+            // --- Check-in/Check-out Logic ---
+            const handleCheckInOut = () => {
+                const now = new Date();
+                if (!isCheckedIn) { // Checking IN
+                    isCheckedIn = true;
+                    checkInTimestamp = now;
+                    checkInTimeEl.textContent = formatTime(now);
+                    checkOutTimeEl.textContent = '--:--';
+                    checkInOutToggle.classList.remove('red');
+                    checkInOutSection.classList.add('active');
+                } else { // Checking OUT
+                    isCheckedIn = false;
+                    checkOutTimeEl.textContent = formatTime(now);
+                    checkInOutToggle.checked = false; // Turn off toggle
+                    checkInOutToggle.classList.add('red');
+                    checkInOutSection.classList.remove('active');
+                }
+            };
+
+            // --- Break Logic ---
+            const handleBreak = () => {
+                const now = new Date();
+                if (!isOnBreak) { // Starting Break
+                    isOnBreak = true;
+                    breakStartTimestamp = now;
+                    breakStartTimeEl.textContent = formatTime(now);
+                    breakEndTimeEl.textContent = '--:--';
+                    breakSection.classList.add('active');
+                } else { // Ending Break
+                    isOnBreak = false;
+                    const breakEndTime = formatTime(now);
+                    breakEndTimeEl.textContent = breakEndTime;
+                    breakToggle.checked = false; // Turn off toggle
+                    breakSection.classList.remove('active');
+                    
+                    // Add to history
+                    const newRow = `
+                        <tr>
+                            <td>${formatTime(breakStartTimestamp)}</td>
+                            <td>${breakEndTime}</td>
+                            <td>${formatDate(now)}</td>
+                        </tr>
+                    `;
+                    breakHistoryBody.insertAdjacentHTML('afterbegin', newRow);
+                }
+            };
+
+            // --- Auto Logout at 11:55 PM ---
+            const scheduleAutoLogout = () => {
+                const now = new Date();
+                const logoutTime = new Date(now);
+                logoutTime.setHours(23, 55, 0, 0); // 11:55:00 PM
+
+                if (now < logoutTime) {
+                    const timeToLogout = logoutTime.getTime() - now.getTime();
+                    setTimeout(() => {
+                        if (isCheckedIn) {
+                           checkOutTimeEl.textContent = formatTime(logoutTime);
+                           isCheckedIn = false;
+                           checkInOutToggle.checked = false;
+                           checkInOutToggle.classList.add('red');
+                           checkInOutSection.classList.remove('active');
+                        }
+                    }, timeToLogout);
+                }
+            };
+
+            // --- Mock Data Population ---
+            const populateMockData = () => {
+                // Mock Break History (Last 7 days)
+                const breaks = [
+                    { start: "01:25 PM", end: "02:15 PM", daysAgo: 0 },
+                    { start: "01:00 PM", end: "02:05 PM", daysAgo: 1 },
+                    { start: "01:05 PM", end: "02:30 PM", daysAgo: 2 },
+                    { start: "01:10 PM", end: "02:00 PM", daysAgo: 3 },
+                ];
+                
+                breaks.forEach(b => {
+                    const d = new Date();
+                    d.setDate(d.getDate() - b.daysAgo);
+                    const row = `<tr><td>${b.start}</td><td>${b.end}</td><td>${formatDate(d)}</td></tr>`;
+                    breakHistoryBody.innerHTML += row;
+                });
+
+                // Mock Recent Activity
+                const activities = [
+                    { main: "You were assigned 3 more new lead", time: "1 hour ago" },
+                    { main: "You Closed a deal today", time: "2 hours ago" },
+                ];
+                
+                activities.forEach(a => {
+                    const item = `
+                        <li>
+                            <span class="activity-dot"></span>
+                            <span class="activity-text">
+                                <span class="main">${a.main}</span>
+                                <span class="time-ago">${a.time}</span>
+                            </span>
+                        </li>
+                    `;
+                    recentActivityList.innerHTML += item;
+                });
+            };
+
+            // --- Initialization ---
+            const init = () => {
+                setGreeting();
+                populateMockData();
+                scheduleAutoLogout();
+
+                checkInOutToggle.addEventListener('change', handleCheckInOut);
+                breakToggle.addEventListener('change', handleBreak);
+
+                // Set hardcoded name
+                employeeNameEl.textContent = 'Rajesh Mehta';
+            };
+
+            init();
+        });
+    </script>
+</body>
+</html> 

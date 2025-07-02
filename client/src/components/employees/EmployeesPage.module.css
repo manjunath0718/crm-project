@@ -1,0 +1,96 @@
+.employeesPageContainer {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.breadcrumbs {
+  font-size: 1.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.pageTitle {
+  font-size: 0.5rem;
+  font-weight: 500;
+}
+
+.lastUpdated {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #888;
+  font-style: italic;
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.refreshBtn {
+  background-color: #f5f6fa;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background-color: #e3f0fd;
+  color: #1976d2;
+  border-color: #1976d2;
+}
+
+.refreshBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.addEmployeesBtn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.addEmployeesBtn:hover {
+  background-color: #555;
+}
+
+.searchContainer {
+  flex-grow: 1;
+  margin: 0 24px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+} 

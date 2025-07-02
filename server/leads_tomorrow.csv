@@ -1,0 +1,4 @@
+Name,Email,Phone,Received Date,Status,Type,Language,Location,Assigned Employee
+Alice Tomorrow,alice.tomorrow@example.com,4444444444,2024-07-02,Closed,Hot,English,Pune,manju nath
+Bob Tomorrow,bob.tomorrow@example.com,5555555555,2024-07-02,Open,Warm,Hindi,Delhi,karthik reddy
+Charlie Tomorrow,charlie.tomorrow@example.com,6666666666,2024-07-02,Closed,Cold,English,Hyderabad,manju nath 

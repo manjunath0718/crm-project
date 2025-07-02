@@ -1,0 +1,20 @@
+.page {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #fafbfc;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 80px; /* Space for bottom nav */
+}
+.content {
+  flex: 1;
+  padding: 0 16px;
+  margin-top: -18px;
+  overflow-y: auto;
+}
+.cardsList {
+  margin-top: 8px;
+} 

@@ -1,0 +1,55 @@
+.dashboardContainer {
+  flex-grow: 1;
+  padding: 16px; /* Reduced padding to free up vertical space */
+  background-color: #f4f6f8;
+  /* The background color and min-height are handled by AdminLayout.mainContent */
+}
+
+.breadcrumbs {
+  font-size: 1.25rem; /* h6 */
+  margin-bottom: 16px; /* Reduced margin for tighter spacing */
+  font-weight: 500; /* Default h6 font-weight */
+  color: rgba(0, 0, 0, 0.87); /* Default primary text color */
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Increased minmax to make cards wider */
+  gap: 24px;
+  margin-bottom: 16px; /* Reduced margin for tighter spacing */
+}
+
+.mainContentGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Two columns: sales analytics (2/3) and recent activity (1/3) */
+  gap: 24px;
+  margin-bottom: 16px; /* Reduced margin for tighter spacing */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 900px) {
+  .mainContentGrid {
+    grid-template-columns: 1fr; /* Stack columns on smaller screens */
+  }
+}
+
+/* Remove specific column styles as grid-template-columns handles it */
+.salesAnalyticsCol,
+.recentActivityCol {
+  width: auto; /* Let grid handle width */
+  padding: 0; /* Remove manual padding, gap handles it */
+}
+
+/* Removed old responsive grid for Stats Cards (xs=12, sm=6, md=3) */
+
+@media (min-width: 600px) { /* sm breakpoint */
+  /* .statsGrid > *:nth-child(1n) { */
+  /*   width: 50%; /* sm=6 */
+  /* } */
+}
+
+@media (min-width: 900px) { /* md breakpoint */
+  /* .statsGrid > *:nth-child(1n) { */
+  /*   width: 25%; /* md=3 */
+  /* } */
+} 

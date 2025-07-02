@@ -1,0 +1,57 @@
+.activityCard {
+  padding: 16px; /* p: 2 */
+  border-radius: 8px;
+  height: 280px; /* Consistent height with Sales Analytics Chart */
+  overflow-y: auto;
+  background-color: #ffffff; /* White background for the card */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.16); /* Softer shadow, consistent with other cards */
+}
+
+.activityTitle {
+  font-size: 1.15rem; /* Consistent with Sales Analytics Chart title */
+  margin-bottom: 16px; /* mb: 2 */
+  font-weight: 600; /* Consistent with Sales Analytics Chart title */
+  color: #333; /* Darker for readability */
+}
+
+.activityList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activityItem {
+  padding: 0;
+  margin-bottom: 8px; /* Equivalent to ListItem with some spacing */
+}
+
+.activityItem:last-child {
+  margin-bottom: 0;
+}
+
+.activityText {
+  font-size: 0.875rem; /* body2 */
+  margin-bottom: 4px; /* mb: 0.5 */
+  color: #333; /* Darker for readability */
+}
+
+.noActivityText {
+  font-size: 0.875rem; /* body2 */
+  color: #666; /* Slightly darker than default secondary text */
+  text-align: center; /* align: center for TableCell */
+}
+
+.activityFeedBox {
+  height: 220px;
+  overflow-y: auto;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+
+.activityFeedBox::-webkit-scrollbar {
+  width: 6px;
+}
+.activityFeedBox::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
+} 

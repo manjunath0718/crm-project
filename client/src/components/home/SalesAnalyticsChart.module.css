@@ -1,0 +1,49 @@
+.chartCard {
+  padding: 18px 24px 8px 24px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  height: 290px;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.chartTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #bdbdbd;
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  letter-spacing: 0.01em;
+  padding-bottom: 8px;
+}
+
+.customTooltip {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 8px 14px 6px 14px;
+  font-size: 0.92rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tooltipLabel {
+  font-weight: 600;
+  color: #bdbdbd;
+  margin-bottom: 2px;
+  font-size: 0.93rem;
+}
+
+.tooltipValue {
+  color: #333;
+  font-size: 0.97rem;
+  font-weight: 500;
+} 

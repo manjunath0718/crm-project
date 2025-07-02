@@ -1,0 +1,58 @@
+.header {
+  background: linear-gradient(135deg, #2563eb 80%, #1e40af 100%);
+  color: #fff;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  padding: 24px 20px 18px 20px;
+  position: relative;
+}
+.brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.brand span {
+  color: #ffe600;
+}
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+.backBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 6px 0 0;
+  display: flex;
+  align-items: center;
+}
+.title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-left: 2px;
+  flex: 1;
+  text-align: center;
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoutBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+} 

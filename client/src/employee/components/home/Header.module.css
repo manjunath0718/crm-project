@@ -1,0 +1,50 @@
+.header {
+    background: linear-gradient(135deg, #2563eb 80%, #1e40af 100%);
+    color: #fff;
+    padding: 24px 20px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.greeting {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.employeeName {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.logoutBtn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoutBtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+} 

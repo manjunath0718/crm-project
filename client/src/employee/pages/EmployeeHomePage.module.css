@@ -1,0 +1,14 @@
+.dashboardContainer {
+    width: 100%;
+    max-width: 480px; /* Common mobile width */
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--grey-bg);
+    padding-bottom: 80px; /* Space for bottom nav */
+    min-height: 100vh;
+}
+
+.mainContent {
+    padding: 20px;
+    margin-top: -20px; /* Pull content up slightly */
+} 

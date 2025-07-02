@@ -1,0 +1,215 @@
+.tableContainer {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  overflow: hidden;
+  background: #fff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+}
+
+th, td {
+  padding: 16px 12px;
+  text-align: left;
+  font-size: 1rem;
+  color: #222;
+}
+
+th {
+  background: #f5f6fa;
+  color: #888;
+  font-weight: 600;
+  border-bottom: 1px solid #ececec;
+}
+
+tr {
+  border-bottom: 1px solid #ececec;
+}
+
+.tableRow {
+  border-radius: 12px;
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+
+.tableRow:hover {
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+}
+
+input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: #1976d2;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}
+.initialsAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #f5f6fa;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: 2px solid #e0e0e0;
+}
+.nameEmail {
+  display: flex;
+  flex-direction: column;
+}
+.empName {
+  font-weight: 600;
+  color: #222;
+  font-size: 1.05rem;
+}
+.empEmail {
+  color: #888;
+  font-size: 0.97rem;
+}
+.statusDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.active {
+  background: #43a047;
+}
+.inactive {
+  background: #ff5252;
+}
+.statusLabel {
+  font-size: 0.98rem;
+  color: #888;
+  font-weight: 500;
+}
+.ellipsisBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+  font-size: 1.5rem;
+  color: #888;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.ellipsisBtn:hover {
+  background: #f0f4fa;
+}
+.ellipsis {
+  font-size: 1.5rem;
+  vertical-align: middle;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 28px 0 0 0;
+}
+.pageBtn {
+  background: #f5f6fa;
+  color: #1976d2;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.pageBtn:disabled {
+  color: #bbb;
+  background: #f5f6fa;
+  cursor: not-allowed;
+}
+.pageBtn:hover:not(:disabled) {
+  background: #e3f0fd;
+}
+.activePage {
+  background: #1976d2;
+  color: #fff;
+  font-weight: 600;
+}
+.ellipsisPage {
+  color: #bbb;
+  font-size: 1.1rem;
+  padding: 0 6px;
+  user-select: none;
+}
+
+.menuPopover {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  min-width: 120px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.menuItem:hover {
+  background: #f5f6fa;
+}
+.menuIcon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f0fa;
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+.menuDelete {
+  color: #14313c;
+  background: #f5f6fa;
+}
+.menuDelete:hover {
+  background: #ececec;
+  color: #d32f2f;
+}
+
+.highlightRow {
+  background: #e3f0fd !important;
+  border-left: 4px solid #1976d2;
+} 

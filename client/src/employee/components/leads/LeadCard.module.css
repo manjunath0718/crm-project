@@ -1,0 +1,353 @@
+.leadCard {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    padding-left: 15px;
+    position: relative;
+    overflow: visible;
+}
+
+.closedCard {
+    background-color: #f3f4f6;
+}
+
+.leftBar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+    background: transparent;
+}
+.barHot { background: var(--orange); }
+.barWarm { background: var(--yellow); }
+.barCold { background: var(--cyan); }
+
+.statusTag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 8px solid;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    background: var(--white);
+    box-sizing: border-box;
+    color: var(--text-dark);
+    transition: border-color 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.statusHot {
+    border-color: var(--orange);
+}
+.statusWarm {
+    border-color: var(--yellow);
+}
+.statusCold {
+    border-color: var(--cyan);
+}
+.statusClosed {
+    opacity: 0.7;
+}
+
+.typeLabel {
+    display: none;
+}
+
+/* Color indicators on the left */
+.leadCard.hot { border-color: var(--orange); }
+.leadCard.warm { border-color: var(--yellow); }
+.leadCard.cold { border-color: var(--cyan); }
+.leadCard.closed { border-color: var(--text-light); }
+
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15px 15px 0;
+}
+
+.leadDetails {
+    font-size: 0.9rem;
+}
+
+.leadName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.leadEmail {
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+.dateContainer {
+    margin-top: 15px;
+}
+
+.dateLabel {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+.leadDate {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-top: 4px;
+}
+
+.statusAndActions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    gap: 8px;
+}
+
+.typeBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 4px solid;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    background: var(--white);
+    box-sizing: border-box;
+}
+
+.typeHot {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+.typeWarm {
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+.typeCold {
+    border-color: var(--cyan);
+    color: var(--cyan);
+}
+
+/* Optional: small type label */
+.typeLabel {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.actionIcons {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.iconButton {
+    background: var(--light-blue);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--primary-blue);
+}
+
+.iconButton i {
+    font-size: 1.2rem;
+}
+
+/* Popover styles */
+.popoverContainer {
+    position: absolute;
+    right: 20px;
+    bottom: -10px;
+    z-index: 20;
+}
+
+.popover {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 15px;
+    width: 200px;
+}
+
+.popoverTitle {
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.popoverButton, .popoverOption {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.popoverButton.hot {
+    background-color: var(--orange);
+    color: #fff;
+}
+.popoverButton.warm {
+    background-color: var(--yellow);
+    color: #fff;
+}
+.popoverButton.cold {
+    background-color: var(--cyan);
+    color: #fff;
+}
+
+.popoverOption {
+    background-color: var(--light-blue);
+}
+
+.popoverInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.saveButton {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 180px;
+  background-color: var(--text-dark);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -90px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .leadCard {
+    padding-left: 8px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+  }
+  .cardContent {
+    flex-direction: column;
+    padding: 12px 8px 12px 0;
+    gap: 10px;
+  }
+  .leadDetails {
+    font-size: 0.98rem;
+  }
+  .leadName {
+    font-size: 1rem;
+  }
+  .leadEmail {
+    font-size: 0.92rem;
+  }
+  .dateContainer {
+    margin-top: 10px;
+  }
+  .statusAndActions {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 8px;
+    height: auto;
+  }
+  .statusTag {
+    width: 48px;
+    height: 48px;
+    font-size: 0.92rem;
+    border-width: 5px;
+    margin-bottom: 0;
+  }
+  .actionIcons {
+    gap: 6px;
+    margin-top: 0;
+  }
+  .iconButton {
+    width: 28px;
+    height: 28px;
+  }
+  .popoverContainer {
+    right: 8px;
+    bottom: -10px;
+  }
+  .popover {
+    width: 90vw;
+    min-width: 0;
+    max-width: 340px;
+    padding: 10px;
+  }
+  .popoverInput {
+    font-size: 0.98rem;
+    padding: 7px;
+  }
+  .saveButton {
+    padding: 8px;
+    font-size: 1rem;
+  }
+}
+
+.errorMsg {
+  color: #d32f2f;
+  background: #fff3f3;
+  border: 1px solid #f8d7da;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-top: 10px;
+  font-size: 0.98rem;
+  text-align: left;
+} 

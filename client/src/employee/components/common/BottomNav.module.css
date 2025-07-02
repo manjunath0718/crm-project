@@ -1,0 +1,38 @@
+.bottomNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--white);
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+.navItem i {
+    font-size: 1.8rem;
+}
+
+.navItem span {
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+.navItem.active {
+    color: var(--primary-blue);
+} 

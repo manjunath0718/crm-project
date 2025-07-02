@@ -1,0 +1,590 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 36px 40px 32px 40px;
+  min-width: 420px;
+  max-width: 96vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.closeBtn:hover {
+  background: #f0f4fa;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 32px;
+}
+
+.placeholder {
+  color: #bbb;
+  font-size: 1.1rem;
+  padding: 32px 0;
+}
+
+.uploadArea {
+  width: 380px;
+  min-height: 180px;
+  border: 2px dashed #cfd8dc;
+  border-radius: 14px;
+  background: #fafbfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 18px 18px 18px;
+  margin-bottom: 18px;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.dragActive {
+  border-color: #5b5d60;
+  background: #e3f0fd;
+}
+.cloudIcon {
+  font-size: 2.5rem;
+  color: #54575a;
+  margin-bottom: 10px;
+}
+.dragText {
+  color: #888;
+  font-size: 1.08rem;
+  margin-bottom: 8px;
+}
+.or {
+  color: #bbb;
+  font-size: 0.98rem;
+  margin: 8px 0 8px 0;
+}
+.browseBtn {
+  background: #5e6062;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.08);
+  transition: background 0.2s;
+}
+.browseBtn:hover {
+  background: #585a5c;
+}
+.sampleFile {
+  color: #bbb;
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+.selectedFileBox {
+  display: flex;
+  align-items: center;
+  background: #f5f6fa;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin: 10px 0;
+  width: 100%;
+  position: relative;
+}
+.csvIcon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: #505255;
+}
+.fileName {
+  font-weight: 600;
+  margin-right: 12px;
+  color: #333;
+}
+.fileSize {
+  color: #888;
+  font-size: 0.98rem;
+  margin-right: 16px;
+}
+.removeFileBtn {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: auto;
+  transition: background 0.2s;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.removeFileBtn:hover {
+  background: #f0f4fa;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 18px;
+  gap: 12px;
+}
+.cancelBtn {
+  background: #f5f6fa;
+  color: #888;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cancelBtn:hover {
+  background: #ececec;
+}
+.nextBtn, .uploadBtn {
+  background: #595b5d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.08);
+  transition: background 0.2s;
+}
+.nextBtn:disabled, .uploadBtn:disabled {
+  background: #b0c4de;
+  color: #fff;
+  cursor: not-allowed;
+}
+.nextBtn:hover:not(:disabled), .uploadBtn:hover:not(:disabled) {
+  background: #585a5c;
+}
+.verifyArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0 18px 0;
+}
+.circularProgress {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+.progressCircleBg, .progressCircleFg {
+  fill: none;
+  stroke-width: 8;
+}
+.progressCircleBg {
+  stroke: #e6e6e6;
+}
+.progressCircleFg {
+  stroke: #4285F4;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.3s;
+  stroke-dasharray: 226; /* 2 * pi * 36 */
+}
+.progressText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+.statusText {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 1rem;
+  color: #666;
+}
+.confirmDialogOverlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+.confirmDialogBox {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  padding: 32px 32px 24px 32px;
+  min-width: 340px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.confirmMessage {
+  color: #333;
+  font-size: 1.08rem;
+  margin-bottom: 22px;
+  text-align: center;
+}
+.confirmActions {
+  display: flex;
+  gap: 16px;
+}
+.confirmBtn {
+  background: #56585a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.08);
+  transition: background 0.2s;
+}
+.confirmBtn:hover {
+  background: #5b5d5e;
+}
+.uploadProgressArea {
+  margin: 32px 0 18px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.progressBarBg {
+  width: 90%;
+  height: 10px;
+  background: #ececec;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progressBarFg {
+  height: 100%;
+  background: #5f6163;
+  border-radius: 6px 0 0 6px;
+  transition: width 0.3s;
+}
+.uploadStatusRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 90%;
+  justify-content: flex-start;
+}
+.uploadPercent {
+  font-weight: 600;
+  color: #56595c;
+  font-size: 1.1rem;
+}
+.successArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0 18px 0;
+}
+.successIcon {
+  font-size: 3.2rem;
+  color: #43a047;
+  margin-bottom: 18px;
+}
+.successMsg {
+  color: #222;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.doneBtn {
+  background: #666869;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.08);
+  transition: background 0.2s;
+}
+.doneBtn:hover {
+  background: #636466;
+}
+
+.dropzone {
+  border: 2px dashed #e0e0e0;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fafafa;
+  transition: background-color 0.2s;
+}
+
+.dropzone:hover {
+  background-color: #f5f5f5;
+}
+
+.fileIcon {
+  font-size: 48px !important;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.dropzoneText {
+  color: #333;
+  font-size: 1rem;
+  margin: 16px 0;
+}
+
+.uploadButton {
+  background-color: #333;
+  color: white;
+}
+
+.uploadButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 24px 32px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  width: 500px;
+  max-width: 90%;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: center; /* Center title */
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.closeButton {
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.dropzone {
+  /* ... existing styles ... */
+  padding: 24px;
+}
+
+.orText {
+  color: #aaa;
+  margin: 12px 0;
+}
+
+.browseButton {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.filePreview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.fileName, .sampleFile {
+  margin: 0;
+  color: #555;
+}
+
+.downloadIcon {
+  color: #888;
+  cursor: pointer;
+}
+
+.errorMessage {
+  color: #D32F2F;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancelButton {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
+  font-weight: 500;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.nextButton {
+  background-color: #333;
+  color: white;
+}
+
+.nextButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.progressContainer {
+  padding: 40px 0;
+}
+
+.progressBar {
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: #4285F4;
+  border-radius: 4px;
+  transition: width 0.2s ease-in-out;
+}
+
+.progressText {
+  text-align: center;
+  margin-top: 12px;
+  color: #555;
+  font-weight: 500;
+}
+
+.successContainer {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.successText {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.doneButton {
+  background-color: #333;
+  color: white;
+  /* Add other button styles as needed */
+}
+
+.errorContainer, .successContainer {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.errorText, .successText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.errorText {
+  color: #D32F2F;
+}
+
+.successText {
+  color: #2E7D32;
+}
+
+.doneButton {
+  /* ... existing styles ... */
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+} 

@@ -1,0 +1,52 @@
+.leadsContainer {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  height: 100%;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumbs {
+  font-size: 1.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.searchContainer {
+  flex-grow: 1;
+  margin: 0 24px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+}
+
+.addLeadsButton {
+  background-color: #525356;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addLeadsButton:hover {
+  background-color: #357ae8;
+} 

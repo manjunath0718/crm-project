@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 32px 0 0 0;
+}
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+label {
+  font-size: 1rem;
+  color: #222;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+input {
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  background: #fff;
+  color: #222;
+  outline: none;
+  transition: border 0.2s;
+}
+input:focus {
+  border: 1.5px solid #2563eb;
+}
+.saveBtn {
+  margin: 32px auto 0 auto;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 44px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.08);
+  transition: background 0.2s;
+}
+.saveBtn:active {
+  background: #1e40af;
+} 

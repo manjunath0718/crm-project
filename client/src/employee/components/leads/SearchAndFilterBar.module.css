@@ -1,0 +1,77 @@
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+    position: relative;
+    z-index: 10;
+}
+
+.searchInputWrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 0 15px;
+    box-shadow: var(--shadow);
+}
+
+.searchInputWrapper i {
+    font-size: 1.3rem;
+    color: var(--text-light);
+}
+
+.searchInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 15px 10px;
+    font-size: 1rem;
+    background-color: transparent;
+}
+
+.filterButton {
+    background-color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.filterButton i {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+}
+
+.filterDropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: var(--white);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  border-radius: 10px;
+  min-width: 140px;
+  z-index: 100;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+}
+.filterOption {
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.filterOption:hover, .filterOption.active {
+  background: #f3f4f6;
+  color: var(--primary-blue);
+} 
