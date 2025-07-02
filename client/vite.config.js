@@ -14,4 +14,12 @@ export default defineConfig({
       include: [/node_modules/],
     },
   },
+  optimizeDeps: {
+    include: ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
+  },
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
 })
