@@ -14,7 +14,7 @@
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Increased minmax to make cards wider */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Increased minmax to make cards wider */
   gap: 24px;
   margin-bottom: 16px; /* Reduced margin for tighter spacing */
 }
