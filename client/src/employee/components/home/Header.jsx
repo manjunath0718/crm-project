@@ -21,9 +21,9 @@ const Header = ({ name = 'Employee', onLogout }) => {
     return (
         <header className={styles.header}>
             <div className={styles.leftContainer}>
-                <div className={styles.brand}>CanovaCRM</div>
-                <div className={styles.greeting}>{greeting}</div>
-                <div className={styles.employeeName}>{name}</div>
+            <div className={styles.brand}>CanovaCRM</div>
+            <div className={styles.greeting}>{greeting}</div>
+            <div className={styles.employeeName}>{name}</div>
             </div>
             <button className={styles.logoutBtn} onClick={onLogout}>
                 <i className="bx bx-log-out"></i>

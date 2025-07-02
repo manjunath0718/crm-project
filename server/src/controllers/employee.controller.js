@@ -191,7 +191,7 @@ exports.getBreakSessions = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
-};
+}; 
 
 // Helper function to distribute unclosed leads fairly among remaining employees
 async function distributeUnclosedLeads(deletedEmployeeId) {

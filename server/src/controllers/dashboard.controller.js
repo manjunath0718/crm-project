@@ -66,7 +66,7 @@ exports.getSalesAnalytics = async (req, res) => {
       },
       { $sort: { _id: 1 } }
     ]);
-
+      
     // Fill in days with zero if no activities that day
     const result = [];
 
