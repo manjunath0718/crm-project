@@ -204,7 +204,7 @@ exports.uploadCsv = (req, res) => {
         console.log('Parsed CSV rows:', results);
         
         // Fetch all employees once
-        const employees = await Employee.find({ role: 'Employee' });
+        const employees = await Employee.find({ role: 'Employee' }); // Already includes all, not filtered by status
         if (!employees.length) {
           fs.unlinkSync(filePath);
           return res.status(400).json({ message: 'No employees found in the system. Cannot assign leads.' });
@@ -298,7 +298,7 @@ exports.uploadCsv = (req, res) => {
             if (lead.assignedTo) {
               const emp = employees.find(e => e._id.equals(lead.assignedTo));
               await Activity.create({
-                description: `You assigned a lead to ${emp ? emp.name : 'an employee'}`,
+                description: `A lead was assigned to ${emp ? emp.name : 'Unknown Employee'}`,
                 activityType: 'Lead Assignment',
                 performedBy: null, // System/admin
                 lead: lead._id,

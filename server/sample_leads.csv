@@ -1,5 +1,7 @@
-Name,Email,Phone,Received Date,Status,Type,Language,Location,Assigned Employee
-John Doe,john@example.com,1234567890,2024-07-01,Open,Hot,English,Pune,
-Jane Smith,jane@example.com,9876543210,2024-07-02,Open,Warm,Hindi,Delhi,
-Bob Lee,bob@example.com,5551234567,2024-07-03,Closed,Cold,English,Hyderabad,manju nath
-Alice Wong,alice@example.com,4445556666,2024-07-04,Open,Warm,Tamil,Hyderabad,karthik reddy
+Name,Email,Phone,Status,Type,Language,Location
+Lead One,lead1@example.com,1234567890,Open,Hot,English,Bangalore
+Lead Two,lead2@example.com,1234567891,Open,Hot,English,Bangalore
+Lead Three,lead3@example.com,1234567892,Open,Hot,English,Bangalore
+Lead Four,lead4@example.com,1234567893,Open,Hot,English,Bangalore
+Lead Five,lead5@example.com,1234567894,Open,Hot,English,Bangalore
+Lead Six,lead6@example.com,1234567895,Open,Hot,English,Bangalore
