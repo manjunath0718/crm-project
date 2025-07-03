@@ -15,7 +15,10 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://crm-project-june25.onrender.com', 'http://localhost:5173'], // add your Vercel frontend URL here
+  credentials: true,
+}));
 app.use(express.json());
 
 // MongoDB Connection

@@ -25,17 +25,17 @@ api.interceptors.request.use(
 );
 
 // Employee CRUD
-export const getEmployees = () => api.get('/employees');
-export const addEmployee = (employeeData) => api.post('/employees', employeeData);
-export const updateEmployee = (id, employeeData) => api.put(`/employees/${id}`, employeeData);
-export const deleteEmployee = (id) => api.delete(`/employees/${id}`);
-export const logoutEmployee = (email) => api.post('/employees/logout', { email });
-export const updateEmployeeStatus = (id, status) => api.put(`/employees/${id}/status`, { status });
+export const getEmployees = () => api.get('/api/employees');
+export const addEmployee = (employeeData) => api.post('/api/employees', employeeData);
+export const updateEmployee = (id, employeeData) => api.put(`/api/employees/${id}`, employeeData);
+export const deleteEmployee = (id) => api.delete(`/api/employees/${id}`);
+export const logoutEmployee = (email) => api.post('/api/employees/logout', { email });
+export const updateEmployeeStatus = (id, status) => api.put(`/api/employees/${id}/status`, { status });
 
 // Leads
-export const getLeads = () => api.get('/leads');
-export const updateLeadStatus = (id, data) => api.patch(`/leads/${id}`, data);
-export const getLeadDistribution = () => api.get('/leads/distribution');
+export const getLeads = () => api.get('/api/leads');
+export const updateLeadStatus = (id, data) => api.patch(`/api/leads/${id}`, data);
+export const getLeadDistribution = () => api.get('/api/leads/distribution');
 
 // Profile
 export const getProfile = (id) => api.get(`/profile/${id}`);
