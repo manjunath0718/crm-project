@@ -1,13 +1,30 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+// Use environment variable for production, fallback to localhost for development
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  // Increase timeout for backend wake-up scenarios
+  timeout: 30000, // 30 seconds
 });
+
+// Retry logic for backend wake-up scenarios
+const retryRequest = async (config, retries = 2, delay = 3000) => {
+  try {
+    return await api(config);
+  } catch (error) {
+    if (retries > 0 && (error.code === 'ECONNABORTED' || error.response?.status >= 500)) {
+      console.log(`Request failed, retrying in ${delay}ms... (${retries} retries left)`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return retryRequest(config, retries - 1, delay * 1.5); // Exponential backoff
+    }
+    throw error;
+  }
+};
 
 // Add request interceptor for authentication
 api.interceptors.request.use(
@@ -23,21 +40,32 @@ api.interceptors.request.use(
   }
 );
 
-// Employee CRUD
-export const getEmployees = () => api.get('/employees');
-export const addEmployee = (employeeData) => api.post('/employees', employeeData);
-export const updateEmployee = (id, employeeData) => api.put(`/employees/${id}`, employeeData);
-export const deleteEmployee = (id) => api.delete(`/employees/${id}`);
-export const logoutEmployee = (email) => api.post('/employees/logout', { email });
-export const updateEmployeeStatus = (id, status) => api.put(`/employees/${id}/status`, { status });
+// Add response interceptor for better error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.code === 'ECONNABORTED') {
+      console.warn('Request timed out - backend might be waking up');
+    }
+    return Promise.reject(error);
+  }
+);
 
-// Leads
-export const getLeads = () => api.get('/leads');
-export const updateLeadStatus = (id, data) => api.patch(`/leads/${id}`, data);
-export const getLeadDistribution = () => api.get('/leads/distribution');
+// Employee CRUD with retry logic
+export const getEmployees = () => retryRequest({ method: 'GET', url: '/employees' });
+export const addEmployee = (employeeData) => retryRequest({ method: 'POST', url: '/employees', data: employeeData });
+export const updateEmployee = (id, employeeData) => retryRequest({ method: 'PUT', url: `/employees/${id}`, data: employeeData });
+export const deleteEmployee = (id) => retryRequest({ method: 'DELETE', url: `/employees/${id}` });
+export const logoutEmployee = (email) => retryRequest({ method: 'POST', url: '/employees/logout', data: { email } });
+export const updateEmployeeStatus = (id, status) => retryRequest({ method: 'PUT', url: `/employees/${id}/status`, data: { status } });
 
-// Profile
-export const getProfile = (id) => api.get(`/profile/${id}`);
-export const updateProfile = (id, data) => api.put(`/profile/${id}`, data);
+// Leads with retry logic
+export const getLeads = () => retryRequest({ method: 'GET', url: '/leads' });
+export const updateLeadStatus = (id, data) => retryRequest({ method: 'PATCH', url: `/leads/${id}`, data });
+export const getLeadDistribution = () => retryRequest({ method: 'GET', url: '/leads/distribution' });
+
+// Profile with retry logic
+export const getProfile = (id) => retryRequest({ method: 'GET', url: `/profile/${id}` });
+export const updateProfile = (id, data) => retryRequest({ method: 'PUT', url: `/profile/${id}`, data });
 
 export default api; 

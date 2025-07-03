@@ -5,6 +5,7 @@ import StatsCard from '../components/home/StatsCard';
 import SalesAnalyticsChart from '../components/home/SalesAnalyticsChart';
 import RecentActivityFeed from '../components/home/RecentActivityFeed';
 import ActiveEmployeesList from '../components/home/ActiveEmployeesList';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 import styles from './DashboardPage.module.css'; // Import the CSS module
 
 function DashboardPage() {
@@ -17,9 +18,14 @@ function DashboardPage() {
   const [salesAnalytics, setSalesAnalytics] = useState([]);
   const [recentActivity, setRecentActivity] = useState([]);
   const [activeEmployees, setActiveEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      
       try {
         const [statsRes, salesRes, activityRes, employeesRes] = await Promise.all([
           api.get('/dashboard/stats'),
@@ -33,10 +39,44 @@ function DashboardPage() {
         setActiveEmployees(employeesRes.data);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
+        setError('Failed to load dashboard data. Please try again.');
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className={styles.dashboardContainer}>
+        <LoadingSpinner message="Loading dashboard data..." />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.dashboardContainer}>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <p style={{ color: '#d32f2f', marginBottom: '1rem' }}>{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            style={{
+              padding: '0.5rem 1rem',
+              backgroundColor: '#1976d2',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.dashboardContainer}> {/* Replaced Box with div */}
