@@ -6,11 +6,13 @@ import ProfileForm from "../components/profile/ProfileForm";
 import BottomNav from "../components/common/BottomNav";
 import { getProfile, updateProfile, logoutEmployee, updateEmployeeStatus } from '../../services/api';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 // Helper: fetch by email (assumes backend supports /profile/email/:email)
 async function getProfileByEmail(email) {
   if (!email) return null;
   try {
-    const res = await fetch(`http://localhost:5000/api/profile/email/${encodeURIComponent(email)}`);
+    const res = await fetch(`${API_URL}/api/profile/email/${encodeURIComponent(email)}`);
     if (!res.ok) throw new Error('Not found');
     return await res.json();
   } catch {

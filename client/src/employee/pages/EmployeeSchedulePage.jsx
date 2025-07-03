@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 
 const STORAGE_KEY = 'employee_leads';
 const PLACEHOLDER_AVATAR = 'https://randomuser.me/api/portraits/lego/1.jpg';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const EmployeeSchedulePage = () => {
   const [leads, setLeads] = useState([]);
@@ -93,7 +94,7 @@ const EmployeeSchedulePage = () => {
     async function fetchLeads() {
       if (!employeeId) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/leads/assigned-to/${employeeId}`);
+        const res = await fetch(`${API_URL}/api/leads/assigned-to/${employeeId}`);
         const data = await res.json();
         setLeads(data.map(lead => ({
           id: lead._id,

@@ -4,12 +4,13 @@ import styles from './RecentActivityCard.module.css';
 const RecentActivityCard = () => {
     const [activities, setActivities] = useState([]);
     const employeeId = sessionStorage.getItem('employeeId') || '';
+    const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         async function fetchActivities() {
             if (!employeeId) return;
             try {
-                const res = await fetch(`http://localhost:5000/api/employees/${employeeId}/activity`);
+                const res = await fetch(`${API_URL}/api/employees/${employeeId}/activity`);
                 const data = await res.json();
                 setActivities(data);
             } catch (err) {

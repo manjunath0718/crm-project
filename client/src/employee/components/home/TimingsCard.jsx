@@ -33,10 +33,12 @@ const TimingsCard = ({ email }) => {
         return `${day}/${month}/${year}`;
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     // Fetch break history from backend on mount
     useEffect(() => {
         if (!email) return;
-        fetch(`http://localhost:5000/api/employees/breaks?email=${encodeURIComponent(email)}`)
+        fetch(`${API_URL}/api/employees/breaks?email=${encodeURIComponent(email)}`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data.breaks)) {
@@ -81,7 +83,7 @@ const TimingsCard = ({ email }) => {
             if (breakStartTimestamp && email) {
                 // POST to backend
                 try {
-                    const res = await fetch('http://localhost:5000/api/employees/break', {
+                    const res = await fetch(`${API_URL}/api/employees/break`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

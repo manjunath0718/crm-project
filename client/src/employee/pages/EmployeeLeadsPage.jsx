@@ -11,6 +11,7 @@ const EmployeeLeadsPage = () => {
   const [filter, setFilter] = useState(null);
   const employeeId = sessionStorage.getItem('employeeId') || '';
   const employeeEmail = sessionStorage.getItem('employeeEmail') || '';
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleLogout = async () => {
     try {
@@ -32,7 +33,7 @@ const EmployeeLeadsPage = () => {
     async function fetchLeads() {
       if (!employeeId) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/leads/assigned-to/${employeeId}`);
+        const res = await fetch(`${API_URL}/api/leads/assigned-to/${employeeId}`);
         const data = await res.json();
         // Map backend fields to LeadCard fields if needed
         setLeads(data.map(lead => ({
@@ -103,7 +104,7 @@ const EmployeeLeadsPage = () => {
       console.error('updateLeadStatus error:', err);
     }
     // Refresh leads from backend
-    const res = await fetch(`/api/leads/assigned-to/${employeeId}`);
+    const res = await fetch(`${API_URL}/api/leads/assigned-to/${employeeId}`);
     const data = await res.json();
     console.log('Fetched leads after update:', data);
     setLeads(data.map(lead => ({
@@ -119,7 +120,7 @@ const EmployeeLeadsPage = () => {
   };
   const handleStatusChange = async (id, newStatus) => {
     await updateLeadStatus(id, { status: newStatus, performedBy: employeeId });
-    const res = await fetch(`/api/leads/assigned-to/${employeeId}`);
+    const res = await fetch(`${API_URL}/api/leads/assigned-to/${employeeId}`);
     const data = await res.json();
     setLeads(data.map(lead => ({
       id: lead._id,
