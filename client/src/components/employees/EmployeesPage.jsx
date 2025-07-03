@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import styles from './EmployeesPage.module.css';
 import EmployeesTable from './EmployeesTable';
 import AddEmployeeModal from './AddEmployeeModal';
-import { getEmployees, addEmployee, updateEmployee, deleteEmployee } from '../../services/api';
+import { getEmployeesWithRetry, addEmployee, updateEmployee, deleteEmployee, wakeUpBackend } from '../../services/api';
 
 const EmployeesPage = ({ searchTerm = '' }, ref) => {
   const [employees, setEmployees] = useState([]);
@@ -13,30 +13,51 @@ const EmployeesPage = ({ searchTerm = '' }, ref) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchEmployees = async () => {
     try {
-      const { data } = await getEmployees();
+      setError(null);
+      const { data } = await getEmployeesWithRetry();
       setEmployees(data);
       setLastUpdated(new Date());
     } catch (error) {
       console.error("Failed to fetch employees:", error);
+      setError('Failed to load employees. Please try refreshing the page.');
       setEmployees([]);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await fetchEmployees();
-    setIsRefreshing(false);
+    setError(null);
+    try {
+      // Try to wake up backend first
+      await wakeUpBackend();
+      await fetchEmployees();
+    } catch (error) {
+      console.error("Failed to refresh employees:", error);
+      setError('Failed to refresh employees. Please try again.');
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   useEffect(() => {
     // Initial fetch
     fetchEmployees();
 
-    // Set up polling to refresh employee data every 10 seconds
-    const intervalId = setInterval(fetchEmployees, 10000); // 10 seconds
+    // Set up polling to refresh employee data every 30 seconds (increased from 10)
+    const intervalId = setInterval(async () => {
+      try {
+        await fetchEmployees();
+      } catch (error) {
+        console.error("Polling failed:", error);
+      }
+    }, 30000); // 30 seconds
 
     // Cleanup interval on component unmount
     return () => {
@@ -161,6 +182,26 @@ const EmployeesPage = ({ searchTerm = '' }, ref) => {
   React.useImperativeHandle(ref, () => ({
     refresh: fetchEmployees
   }));
+
+  if (loading) {
+    return (
+      <div className={styles.employeesPageContainer}>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          Loading employees...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.employeesPageContainer}>
+        <div style={{ textAlign: 'center', padding: '2rem', color: 'red' }}>
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.employeesPageContainer}>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 // import { Box, Typography, Grid, Paper } from '@mui/material'; // Removed MUI imports
-import api from '../services/api';
+import api, { wakeUpBackend } from '../services/api';
 import StatsCard from '../components/home/StatsCard';
 import SalesAnalyticsChart from '../components/home/SalesAnalyticsChart';
 import RecentActivityFeed from '../components/home/RecentActivityFeed';
 import ActiveEmployeesList from '../components/home/ActiveEmployeesList';
-import LoadingSpinner from '../components/common/LoadingSpinner';
 import styles from './DashboardPage.module.css'; // Import the CSS module
 
 function DashboardPage() {
@@ -23,10 +22,13 @@ function DashboardPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      
       try {
+        setLoading(true);
+        setError(null);
+        
+        // Try to wake up backend first
+        await wakeUpBackend();
+        
         const [statsRes, salesRes, activityRes, employeesRes] = await Promise.all([
           api.get('/dashboard/stats'),
           api.get('/dashboard/sales-analytics'),
@@ -39,7 +41,7 @@ function DashboardPage() {
         setActiveEmployees(employeesRes.data);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
-        setError('Failed to load dashboard data. Please try again.');
+        setError('Failed to load dashboard data. Please try refreshing the page.');
       } finally {
         setLoading(false);
       }
@@ -50,7 +52,9 @@ function DashboardPage() {
   if (loading) {
     return (
       <div className={styles.dashboardContainer}>
-        <LoadingSpinner message="Loading dashboard data..." />
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          Loading dashboard data...
+        </div>
       </div>
     );
   }
@@ -58,21 +62,8 @@ function DashboardPage() {
   if (error) {
     return (
       <div className={styles.dashboardContainer}>
-        <div style={{ textAlign: 'center', padding: '2rem' }}>
-          <p style={{ color: '#d32f2f', marginBottom: '1rem' }}>{error}</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            style={{
-              padding: '0.5rem 1rem',
-              backgroundColor: '#1976d2',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
-          >
-            Retry
-          </button>
+        <div style={{ textAlign: 'center', padding: '2rem', color: 'red' }}>
+          {error}
         </div>
       </div>
     );
