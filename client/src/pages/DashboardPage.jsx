@@ -22,10 +22,10 @@ function DashboardPage() {
     const fetchData = async () => {
       try {
         const [statsRes, salesRes, activityRes, employeesRes] = await Promise.all([
-          api.get('/dashboard/stats'),
-          api.get('/dashboard/sales-analytics'),
-          api.get('/dashboard/recent-activity'),
-          api.get('/dashboard/active-employees'),
+          api.get('/api/dashboard/stats'),
+          api.get('/api/dashboard/sales-analytics'),
+          api.get('/api/dashboard/recent-activity'),
+          api.get('/api/dashboard/active-employees'),
         ]);
         setStats(statsRes.data);
         // Ensure Sunday closed leads is always 0
