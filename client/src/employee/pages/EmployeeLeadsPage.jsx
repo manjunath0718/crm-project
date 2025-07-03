@@ -32,7 +32,7 @@ const EmployeeLeadsPage = () => {
     async function fetchLeads() {
       if (!employeeId) return;
       try {
-        const res = await fetch(`/api/leads/assigned-to/${employeeId}`);
+        const res = await fetch(`http://localhost:5000/api/leads/assigned-to/${employeeId}`);
         const data = await res.json();
         // Map backend fields to LeadCard fields if needed
         setLeads(data.map(lead => ({

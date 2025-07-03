@@ -9,7 +9,7 @@ const RecentActivityCard = () => {
         async function fetchActivities() {
             if (!employeeId) return;
             try {
-                const res = await fetch(`/api/employees/${employeeId}/activity`);
+                const res = await fetch(`http://localhost:5000/api/employees/${employeeId}/activity`);
                 const data = await res.json();
                 setActivities(data);
             } catch (err) {
