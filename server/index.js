@@ -16,7 +16,11 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['https://crm-project-june25.onrender.com', 'http://localhost:5173'], // add your Vercel frontend URL here
+  origin: [
+    'https://crm-project-june.vercel.app', // your Vercel frontend
+    'http://localhost:5173'                // for local dev
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
 }));
 app.use(express.json());
