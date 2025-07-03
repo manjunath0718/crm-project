@@ -16,7 +16,17 @@ const EmployeeLoginPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      const data = await res.json();
+      const text = await res.text();
+      let data = {};
+      if (text) {
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          throw new Error('Invalid server response');
+        }
+      } else {
+        throw new Error('Empty server response');
+      }
       if (!res.ok) throw new Error(data.error || 'Login failed');
       const fullName = `${data.firstName} ${data.lastName}`;
       sessionStorage.setItem('employeeName', fullName);

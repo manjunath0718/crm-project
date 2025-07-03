@@ -98,6 +98,7 @@ exports.deleteEmployee = async (req, res) => {
 
 // Employee login (email + last name as password)
 exports.loginEmployee = async (req, res) => {
+  console.log('Login endpoint hit', req.body); // Log for debugging
   try {
     const { email, password } = req.body;
     const employee = await Employee.findOne({ email });
