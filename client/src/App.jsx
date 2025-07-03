@@ -16,7 +16,6 @@ import EmployeeSchedulePage from './employee/pages/EmployeeSchedulePage';
 import EmployeeProfilePage from './employee/pages/EmployeeProfilePage';
 import EmployeeLoginPage from './employee/pages/EmployeeLoginPage';
 import { logoutEmployee } from './services/api';
-import backendWakeUpService from './services/backendWakeUp';
 
 // Create theme
 const theme = createTheme({
@@ -44,9 +43,6 @@ function EmployeeProtectedRoute() {
 function App() {
   useEffect(() => {
     let visibilityTimeout;
-
-    // Start backend wake-up service to prevent sleep
-    backendWakeUpService.start(5); // Wake up every 5 minutes
 
     // Handle automatic logout when browser is closed or page is refreshed
     const handleBeforeUnload = async (event) => {
@@ -100,8 +96,6 @@ function App() {
       if (visibilityTimeout) {
         clearTimeout(visibilityTimeout);
       }
-      // Stop backend wake-up service
-      backendWakeUpService.stop();
     };
   }, []);
 

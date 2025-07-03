@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { Box, Typography, Grid, Paper } from '@mui/material'; // Removed MUI imports
-import api, { wakeUpBackend } from '../services/api';
+import api from '../services/api';
 import StatsCard from '../components/home/StatsCard';
 import SalesAnalyticsChart from '../components/home/SalesAnalyticsChart';
 import RecentActivityFeed from '../components/home/RecentActivityFeed';
@@ -17,18 +17,10 @@ function DashboardPage() {
   const [salesAnalytics, setSalesAnalytics] = useState([]);
   const [recentActivity, setRecentActivity] = useState([]);
   const [activeEmployees, setActiveEmployees] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        setError(null);
-        
-        // Try to wake up backend first
-        await wakeUpBackend();
-        
         const [statsRes, salesRes, activityRes, employeesRes] = await Promise.all([
           api.get('/dashboard/stats'),
           api.get('/dashboard/sales-analytics'),
@@ -41,33 +33,10 @@ function DashboardPage() {
         setActiveEmployees(employeesRes.data);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
-        setError('Failed to load dashboard data. Please try refreshing the page.');
-      } finally {
-        setLoading(false);
       }
     };
     fetchData();
   }, []);
-
-  if (loading) {
-    return (
-      <div className={styles.dashboardContainer}>
-        <div style={{ textAlign: 'center', padding: '2rem' }}>
-          Loading dashboard data...
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.dashboardContainer}>
-        <div style={{ textAlign: 'center', padding: '2rem', color: 'red' }}>
-          {error}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={styles.dashboardContainer}> {/* Replaced Box with div */}
