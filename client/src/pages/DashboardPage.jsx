@@ -28,7 +28,19 @@ function DashboardPage() {
           api.get('/dashboard/active-employees'),
         ]);
         setStats(statsRes.data);
-        setSalesAnalytics(salesRes.data);
+        // Ensure Sunday closed leads is always 0
+        let analytics = salesRes.data ? [...salesRes.data] : [];
+        if (analytics.length > 0) {
+          // Find Sunday (day 0) and set its count to 0
+          analytics = analytics.map((item, idx) => {
+            const date = new Date(item.date);
+            if (date.getDay() === 0) {
+              return { ...item, count: 0 };
+            }
+            return item;
+          });
+        }
+        setSalesAnalytics(analytics);
         setRecentActivity(activityRes.data);
         setActiveEmployees(employeesRes.data);
       } catch (error) {
