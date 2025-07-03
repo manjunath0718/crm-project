@@ -147,44 +147,35 @@ function distributeLeads(leads, employees) {
   const empLeadCounts = {};
   employees.forEach(emp => { empLeadCounts[emp._id.toString()] = 0; });
 
-  // Assign leads
   const assignments = [];
-  leads.forEach(lead => {
-    let candidates = [];
-    // 1. Match by both language and location
-    if (lead.language && lead.location) {
-      const key = lead.language + '|' + lead.location;
-      candidates = byLangLoc[key] || [];
+
+  // Guarantee: if leads >= employees, every employee gets at least one lead
+  if (leads.length >= employees.length) {
+    // Assign one lead to each employee first
+    for (let i = 0; i < employees.length; i++) {
+      assignments.push({ lead: leads[i], employee: employees[i] });
+      empLeadCounts[employees[i]._id.toString()]++;
+      console.log(`Assigned lead '${leads[i].name}' to employee '${employees[i].name}' (guaranteed 1 each)`);
     }
-    // 2. If none, match by language
-    if (candidates.length === 0 && lead.language) {
-      candidates = byLang[lead.language] || [];
-    }
-    // 3. If none, match by location
-    if (candidates.length === 0 && lead.location) {
-      candidates = byLoc[lead.location] || [];
-    }
-    // 4. If still none, use all employees
-    if (candidates.length === 0) {
-      candidates = employees;
-    }
-    // Find the candidate with the fewest leads assigned so far
-    let minCount = Infinity;
-    let chosen = null;
-    candidates.forEach(emp => {
-      const count = empLeadCounts[emp._id.toString()];
-      if (count < minCount) {
-        minCount = count;
-        chosen = emp;
-      }
-    });
-    if (chosen) {
+    // Distribute the rest as before
+    for (let i = employees.length; i < leads.length; i++) {
+      // Use all employees for fair distribution
+      let minCount = Math.min(...Object.values(empLeadCounts));
+      let candidates = employees.filter(emp => empLeadCounts[emp._id.toString()] === minCount);
+      // Pick the first candidate (or random if you want)
+      const chosen = candidates[0];
+      assignments.push({ lead: leads[i], employee: chosen });
       empLeadCounts[chosen._id.toString()]++;
-      assignments.push({ lead, employee: chosen });
-    } else {
-      assignments.push({ lead, employee: null });
+      console.log(`Assigned lead '${leads[i].name}' to employee '${chosen.name}' (even distribution)`);
     }
-  });
+  } else {
+    // Fewer leads than employees: assign one lead to each of the first N employees
+    for (let i = 0; i < leads.length; i++) {
+      assignments.push({ lead: leads[i], employee: employees[i] });
+      empLeadCounts[employees[i]._id.toString()]++;
+      console.log(`Assigned lead '${leads[i].name}' to employee '${employees[i].name}' (fewer leads than employees)`);
+    }
+  }
   return assignments;
 }
 
